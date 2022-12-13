@@ -7,7 +7,7 @@
 
 - 🔭 I'm currently studying at **Data ScienceTech Institute**
 
-- 👨‍💻 All of my projects are available at [https://github.com/caiquedias21/caiquedias_BI_projects/](https://github.com/caiquedias21/caiquedias_BI_projects/)
+- 👨‍💻 All of my projects are available at [https://github.com/caiquedias21/caiquedias_BI_projects/](https://github.com/caiquedias21/caiquedias_projects/)
 
 - 📝 I will regularly write articles on [https://medium.com/@caique.mirandadias](https://medium.com/@caique.mirandadias)
 
