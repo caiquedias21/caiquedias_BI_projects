@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectInfo>
+    <Name>CallCenterProject_ETL</Name>
+    <LastWriteTime>2022-11-24T01:52:02.1686458Z</LastWriteTime>
+    <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+  </ProjectInfo>
+  <LastBuildInfos>
+    <ProjectBuildItemInfo>
+      <Name>STA - Employees.dtsx</Name>
+      <LastWriteTime>2022-11-23T12:36:47.5633547Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>STA - Call Types.dtsx</Name>
+      <LastWriteTime>2022-11-23T13:15:37.3881349Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>STA - US States.dtsx</Name>
+      <LastWriteTime>2022-11-23T12:34:53.8833879Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>STA - Call Charges.dtsx</Name>
+      <LastWriteTime>2022-11-23T12:40:02.2239352Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>STA - Call Data.dtsx</Name>
+      <LastWriteTime>2022-11-23T12:38:31.9552563Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>ODS - Employees.dtsx</Name>
+      <LastWriteTime>2022-11-23T17:45:04.9759528Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>ODS - Call Charges.dtsx</Name>
+      <LastWriteTime>2022-11-23T14:49:41.9645503Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>ODS - Call Types.dtsx</Name>
+      <LastWriteTime>2022-11-23T14:42:07.8313663Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>ODS - Call Data.dtsx</Name>
+      <LastWriteTime>2022-11-24T00:55:37.1773559Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>DWH - Dim Employees.dtsx</Name>
+      <LastWriteTime>2022-11-23T19:30:01.305074Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>DWH - Dim Call Types.dtsx</Name>
+      <LastWriteTime>2022-11-23T19:57:44.8098192Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>DWH - Fact Call Data.dtsx</Name>
+      <LastWriteTime>2022-11-24T00:59:13.0290223Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>Scheduler.dtsx</Name>
+      <LastWriteTime>2022-11-24T01:56:05.0908897Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+  </LastBuildInfos>
+</BuildLog>

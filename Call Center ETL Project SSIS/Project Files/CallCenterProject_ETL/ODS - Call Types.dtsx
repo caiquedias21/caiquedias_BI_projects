@@ -1,0 +1,2219 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/23/2022 1:46:10 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-47EQI2IB"
+  DTS:CreatorName="LAPTOP-47EQI2IB\caiqu"
+  DTS:DTSID="{3C07C126-8DA4-4F89-BB94-78E25796B7EE}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.948.0"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="ODS - Call Types"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{23348C07-0481-408E-94AE-C75318FD3BDC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ServerName.ADM_DatabaseName]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{e3e5771f-3f10-4c83-adf5-bd1e9d0438a1}"
+      DTS:ObjectName="ServerName.ADM_DatabaseName">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Project::ADM_DatabaseName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Project::ServerName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=ADM_CallCenter;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{E41E89AB-BA8C-4931-801D-49FF09D8A42A}localhost.STA_CallCenter;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ServerName.ODS_DatabaseName]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{f57ca61e-acd0-417e-bd49-20f2d3e9ca9a}"
+      DTS:ObjectName="ServerName.ODS_DatabaseName">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Project::ODS_DatabaseName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Project::ServerName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=ODS_CallCenter;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{E41E89AB-BA8C-4931-801D-49FF09D8A42A}localhost.STA_CallCenter;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ServerName.STA_DatabaseName]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E41E89AB-BA8C-4931-801D-49FF09D8A42A}"
+      DTS:ObjectName="ServerName.STA_DatabaseName">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Project::STA_DatabaseName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Project::ServerName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=STA_CallCenter;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{E41E89AB-BA8C-4931-801D-49FF09D8A42A}localhost.STA_CallCenter;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Extract and Load ODS_CallTypes"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{e18b4c3c-61f3-4a6c-8c9f-0d11875404d7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Extract and Load ODS_CallTypes"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Unir Tudo;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina linhas de vários fluxos de dados sem classificação. Por exemplo, adicione novamente as linhas a um fluxo de dados após a correção de erros. Se a classificação for importante, é recomendável usar a transformação Mesclagem."
+              name="ALL - Technical Errors"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Unir Tudo Entrada 1]"
+                  name="Unir Tudo Entrada 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Unir Tudo Entrada 1].Columns[CallTypeID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeID"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Unir Tudo Entrada 1].Columns[CallTypeLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeLabel"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabel]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeLabel]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Unir Tudo Entrada 1].Columns[CallTypeLabelLKPKey]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeLabelLKPKey"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabelLKPKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeLabelLKPKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Unir Tudo Entrada 1].Columns[Error_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Error_Date"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Unir Tudo Entrada 1].Columns[Error_Package]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Error_Package"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Package]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Package]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Unir Tudo Entrada 1].Columns[Error_TaskName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Error_TaskName"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_TaskName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_TaskName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Unir Tudo Entrada 1].Columns[Error_Column]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Error_Column"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Column]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Column]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Unir Tudo Entrada 1].Columns[Error_Message]"
+                      cachedDataType="wstr"
+                      cachedLength="306"
+                      cachedName="Error_Message"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Message]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Message]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 1]"
+                  hasSideEffects="true"
+                  name="Entrada Unir Tudo 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 1].Columns[CallTypeID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeID"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 1].Columns[CallTypeLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeLabel"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabel]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeLabel]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 1].Columns[CallTypeLabelLKPKey]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeLabelLKPKey"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabelLKPKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeLabelLKPKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 1].Columns[Error_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Error_Date"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 1].Columns[Error_Package]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Error_Package"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Package]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Package]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 1].Columns[Error_TaskName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Error_TaskName"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_TaskName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_TaskName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 1].Columns[Error_Column]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Error_Column"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Column]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Column]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 1].Columns[Error_Message]"
+                      cachedDataType="wstr"
+                      cachedLength="288"
+                      cachedName="Error_Message"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Message]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Message]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 2]"
+                  hasSideEffects="true"
+                  name="Entrada Unir Tudo 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 2].Columns[CallTypeID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeID"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 2].Columns[CallTypeLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeLabel"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabel]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeLabel]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 2].Columns[CallTypeLabelLKPKey]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeLabelLKPKey"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabelLKPKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeLabelLKPKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 2].Columns[Error_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Error_Date"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 2].Columns[Error_Package]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Error_Package"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Package]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Package]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 2].Columns[Error_TaskName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Error_TaskName"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_TaskName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_TaskName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 2].Columns[Error_Message]"
+                      cachedDataType="wstr"
+                      cachedLength="296"
+                      cachedName="Error_Message"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Message]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Message]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 2].Columns[Error_Column]"
+                      cachedDataType="wstr"
+                      cachedLength="13"
+                      cachedName="Error_Column"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Column]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Identificação de linhagem de coluna de saída"
+                          name="OutputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Column]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Entrada Unir Tudo 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1]"
+                  name="Unir Tudo Saída 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeID]"
+                      name="CallTypeID" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeLabel]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeLabel]"
+                      name="CallTypeLabel" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeLabelLKPKey]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[CallTypeLabelLKPKey]"
+                      name="CallTypeLabelLKPKey" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Date]"
+                      name="Error_Date" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Package]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Package]"
+                      name="Error_Package" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_TaskName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_TaskName]"
+                      name="Error_TaskName" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Column]"
+                      dataType="wstr"
+                      length="13"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Column]"
+                      name="Error_Column" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Message]"
+                      dataType="wstr"
+                      length="306"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Message]"
+                      name="Error_Message" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Divisão Condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Encaminha colunas de dados para saídas diferentes, dependendo do conteúdo dos dados. Use condições (expressões do SSIS) para especificar quais linhas são encaminhadas. Por exemplo, separe os registros que precisam ser limpos daqueles que estão prontos para serem carregados ou encaminhe somente um subconjunto de registros."
+              name="CSPL - Check if Call Type ID is null or empty"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Inputs[Entrada de Divisão Condicional]"
+                  description="Entrada para a Transformação Divisão Condicional"
+                  name="Entrada de Divisão Condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Inputs[Entrada de Divisão Condicional].Columns[CallTypeID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeID"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Outputs[Null or Empty]"
+                  description="Saída 1 da Transformação Divisão Condicional"
+                  errorOrTruncationOperation="Computação"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Null or Empty"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Inputs[Entrada de Divisão Condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica a expressão. Essa versão da expressão usa identificadores de linhagem, em vez de nomes de colunas."
+                      name="Expression">[ISNULL](#{Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]}) || [TRIM](#{Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]}) == ""</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica a versão amigável da expressão. Essa versão de expressão usa nomes de colunas."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(CallTypeID) || TRIM(CallTypeID) == ""</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica a posição da condição na lista de condições que a transformação avalia. A ordem de avaliação é do menor para o maior valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Outputs[Not Null and Not Empty]"
+                  description="Saída Padrão da Transformação Divisão Condicional"
+                  exclusionGroup="1"
+                  name="Not Null and Not Empty"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Inputs[Entrada de Divisão Condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Outputs[Saída de Erro de Divisão Condicional]"
+                  description="Saída de Erro da Transformação Divisão Condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Divisão Condicional"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Inputs[Entrada de Divisão Condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Outputs[Saída de Erro de Divisão Condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Outputs[Saída de Erro de Divisão Condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Outputs[Saída de Erro de Divisão Condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Outputs[Saída de Erro de Divisão Condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID)"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversão de Dados;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversão de Dados"
+              name="DCNV - Conversion unicode to int (Call Type ID)"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Inputs[Entrada de Conversão de Dados]"
+                  name="Entrada de Conversão de Dados">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Inputs[Entrada de Conversão de Dados].Columns[CallTypeID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeID"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Outputs[Saída de Conversão de Dados]"
+                  exclusionGroup="1"
+                  name="Saída de Conversão de Dados"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Outputs[Saída de Conversão de Dados].Columns[CallTypeID_INT]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="RedirectRow"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Outputs[Saída de Conversão de Dados].Columns[CallTypeID_INT]"
+                      name="CallTypeID_INT"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Outputs[Saída de Erro de Conversão de Dados]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Conversão de Dados"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversão de Dados;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversão de Dados"
+              name="DCNV - Resize Columns"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Inputs[Entrada de Conversão de Dados]"
+                  name="Entrada de Conversão de Dados">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Inputs[Entrada de Conversão de Dados].Columns[CallTypeLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeLabel"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabel]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Outputs[Saída de Conversão de Dados]"
+                  exclusionGroup="1"
+                  name="Saída de Conversão de Dados"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Outputs[Saída de Conversão de Dados].Columns[CallTypeLabel_20]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="RedirectRow"
+                      length="20"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Outputs[Saída de Conversão de Dados].Columns[CallTypeLabel_20]"
+                      name="CallTypeLabel_20"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabel]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Outputs[Saída de Erro de Conversão de Dados]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Conversão de Dados"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID)"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Coluna Derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Cria novos valores de coluna aplicando expressões a colunas de entrada da transformação. Crie novas colunas ou substitua as existentes. Por exemplo, concatene os valores das colunas 'first name' e 'last name' para formar uma coluna 'full name'."
+              name="DER - Error conversion (CallTypeID)"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Inputs[Entrada de Coluna Derivada]"
+                  description="Entrada para a Transformação Coluna Derivada"
+                  name="Entrada de Coluna Derivada">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Inputs[Entrada de Coluna Derivada].Columns[CallTypeID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeID"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada]"
+                  description="Saída Padrão da Transformação Coluna Derivada"
+                  exclusionGroup="1"
+                  name="Saída de Coluna Derivada"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Inputs[Entrada de Coluna Derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Date]"
+                      name="Error_Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Package]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Package]"
+                      name="Error_Package"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">(DT_WSTR,255)@[System::PackageName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,255)@[System::PackageName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_TaskName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_TaskName]"
+                      name="Error_TaskName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">(DT_WSTR,255)@[System::TaskName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,255)@[System::TaskName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Column]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Column]"
+                      name="Error_Column"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">"CallTypeID"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"CallTypeID"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Message]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="288"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Message]"
+                      name="Error_Message"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">"Conversion failed for CallTypeID " + #{Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"Conversion failed for CallTypeID " + CallTypeID</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Erro de Coluna Derivada]"
+                  description="Saída de Erro da Transformação Coluna Derivada"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Coluna Derivada"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Inputs[Entrada de Coluna Derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID)"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Coluna Derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Cria novos valores de coluna aplicando expressões a colunas de entrada da transformação. Crie novas colunas ou substitua as existentes. Por exemplo, concatene os valores das colunas 'first name' e 'last name' para formar uma coluna 'full name'."
+              name="DER - Error info (CallTypeID)"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Inputs[Entrada de Coluna Derivada]"
+                  description="Entrada para a Transformação Coluna Derivada"
+                  name="Entrada de Coluna Derivada">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Inputs[Entrada de Coluna Derivada].Columns[CallTypeID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeID"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada]"
+                  description="Saída Padrão da Transformação Coluna Derivada"
+                  exclusionGroup="1"
+                  name="Saída de Coluna Derivada"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Inputs[Entrada de Coluna Derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Date]"
+                      name="Error_Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Package]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Package]"
+                      name="Error_Package"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">(DT_WSTR,255)@[System::PackageName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,255)@[System::PackageName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_TaskName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_TaskName]"
+                      name="Error_TaskName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">(DT_WSTR,255)@[System::TaskName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,255)@[System::TaskName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Column]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="12"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Column]"
+                      name="Error_Column"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">"Call Type ID"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"Call Type ID"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Message]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="306"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada].Columns[Error_Message]"
+                      name="Error_Message"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">"The Call Type ID" + #{Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]} + " is missing or is not a valid data."</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"The Call Type ID" + CallTypeID + " is missing or is not a valid data."</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Erro de Coluna Derivada]"
+                  description="Saída de Erro da Transformação Coluna Derivada"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Coluna Derivada"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Inputs[Entrada de Coluna Derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Coluna Derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Cria novos valores de coluna aplicando expressões a colunas de entrada da transformação. Crie novas colunas ou substitua as existentes. Por exemplo, concatene os valores das colunas 'first name' e 'last name' para formar uma coluna 'full name'."
+              name="DER - Error info about resize task"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Inputs[Entrada de Coluna Derivada]"
+                  description="Entrada para a Transformação Coluna Derivada"
+                  name="Entrada de Coluna Derivada">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Inputs[Entrada de Coluna Derivada].Columns[CallTypeLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeLabel"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabel]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada]"
+                  description="Saída Padrão da Transformação Coluna Derivada"
+                  exclusionGroup="1"
+                  name="Saída de Coluna Derivada"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Inputs[Entrada de Coluna Derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Date]"
+                      name="Error_Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Package]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Package]"
+                      name="Error_Package"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">(DT_WSTR,255)@[System::PackageName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,255)@[System::PackageName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_TaskName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_TaskName]"
+                      name="Error_TaskName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">(DT_WSTR,255)@[System::TaskName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,255)@[System::TaskName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Column]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="13"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Column]"
+                      name="Error_Column"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">"CallTypeLabel"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"CallTypeLabel"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Message]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      length="296"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada].Columns[Error_Message]"
+                      name="Error_Message"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">"Truncation failed on row CallTypeLabel = " + #{Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabel]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"Truncation failed on row CallTypeLabel = " + CallTypeLabel</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Erro de Coluna Derivada]"
+                  description="Saída de Erro da Transformação Coluna Derivada"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Coluna Derivada"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Inputs[Entrada de Coluna Derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="OLE_DST - ODS Call Types"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[dbo].[CallTypes]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ServerName.ODS_DatabaseName]"
+                  connectionManagerRefId="Package.ConnectionManagers[ServerName.ODS_DatabaseName]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Inputs[Entrada de Destino OLE DB].Columns[CallTypeID_INT]"
+                      cachedDataType="i4"
+                      cachedName="CallTypeID_INT"
+                      externalMetadataColumnId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Inputs[Entrada de Destino OLE DB].ExternalColumns[CallTypeID]"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Outputs[Saída de Conversão de Dados].Columns[CallTypeID_INT]" />
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Inputs[Entrada de Destino OLE DB].Columns[CallTypeLabel_20]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CallTypeLabel_20"
+                      externalMetadataColumnId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Inputs[Entrada de Destino OLE DB].ExternalColumns[CallTypeLabel]"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Outputs[Saída de Conversão de Dados].Columns[CallTypeLabel_20]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Inputs[Entrada de Destino OLE DB].ExternalColumns[CallTypeID]"
+                      dataType="i4"
+                      name="CallTypeID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Inputs[Entrada de Destino OLE DB].ExternalColumns[CallTypeLabel]"
+                      dataType="wstr"
+                      length="20"
+                      name="CallTypeLabel" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="OLE_DST - Technical_Rejects"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[dbo].[Technical_Rejects]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ServerName.ADM_DatabaseName]"
+                  connectionManagerRefId="Package.ConnectionManagers[ServerName.ADM_DatabaseName]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].Columns[Error_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Error_Date"
+                      externalMetadataColumnId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].ExternalColumns[Error_Date]"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Date]" />
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].Columns[Error_Package]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Error_Package"
+                      externalMetadataColumnId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].ExternalColumns[Error_Package]"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Package]" />
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].Columns[Error_TaskName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Error_TaskName"
+                      externalMetadataColumnId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].ExternalColumns[Error_TaskName]"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_TaskName]" />
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].Columns[Error_Column]"
+                      cachedDataType="wstr"
+                      cachedLength="13"
+                      cachedName="Error_Column"
+                      externalMetadataColumnId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].ExternalColumns[Error_Column]"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Column]" />
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].Columns[Error_Message]"
+                      cachedDataType="wstr"
+                      cachedLength="306"
+                      cachedName="Error_Message"
+                      externalMetadataColumnId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].ExternalColumns[Error_Message]"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1].Columns[Error_Message]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].ExternalColumns[Error_Date]"
+                      dataType="dbTimeStamp"
+                      name="Error_Date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].ExternalColumns[Error_Package]"
+                      dataType="wstr"
+                      length="255"
+                      name="Error_Package" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].ExternalColumns[Error_TaskName]"
+                      dataType="wstr"
+                      length="255"
+                      name="Error_TaskName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].ExternalColumns[Error_Column]"
+                      dataType="wstr"
+                      length="30"
+                      name="Error_Column" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB].ExternalColumns[Error_Message]"
+                      dataType="wstr"
+                      length="400"
+                      name="Error_Message" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origem OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;7"
+              description="Origem OLE DB"
+              name="OLE_SRC - STA Call Types"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[dbo].[CallTypes]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Os mapeamentos entre os parâmetros no comando SQL e as variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ServerName.STA_DatabaseName]"
+                  connectionManagerRefId="Package.ConnectionManagers[ServerName.STA_DatabaseName]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB]"
+                  name="Saída de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].ExternalColumns[CallTypeID]"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeID]"
+                      name="CallTypeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].ExternalColumns[CallTypeLabel]"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabel]"
+                      name="CallTypeLabel"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabelLKPKey]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].ExternalColumns[CallTypeLabelLKPKey]"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].Columns[CallTypeLabelLKPKey]"
+                      name="CallTypeLabelLKPKey"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].ExternalColumns[CallTypeID]"
+                      dataType="wstr"
+                      length="255"
+                      name="CallTypeID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].ExternalColumns[CallTypeLabel]"
+                      dataType="wstr"
+                      length="255"
+                      name="CallTypeLabel" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB].ExternalColumns[CallTypeLabelLKPKey]"
+                      dataType="wstr"
+                      length="255"
+                      name="CallTypeLabelLKPKey" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Erro de Origem OLE DB]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Erro de Origem OLE DB].Columns[CallTypeID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Erro de Origem OLE DB].Columns[CallTypeID]"
+                      name="CallTypeID" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Erro de Origem OLE DB].Columns[CallTypeLabel]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Erro de Origem OLE DB].Columns[CallTypeLabel]"
+                      name="CallTypeLabel" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Erro de Origem OLE DB].Columns[CallTypeLabelLKPKey]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Erro de Origem OLE DB].Columns[CallTypeLabelLKPKey]"
+                      name="CallTypeLabelLKPKey" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Extract and Load ODS_CallTypes.Paths[Not Null and Not Empty]"
+              endId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Inputs[Entrada de Conversão de Dados]"
+              name="Not Null and Not Empty"
+              startId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Outputs[Not Null and Not Empty]" />
+            <path
+              refId="Package\DFT - Extract and Load ODS_CallTypes.Paths[Null or Empty]"
+              endId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Inputs[Entrada de Coluna Derivada]"
+              name="Null or Empty"
+              startId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Outputs[Null or Empty]" />
+            <path
+              refId="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Coluna Derivada]"
+              endId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Unir Tudo Entrada 1]"
+              name="Saída de Coluna Derivada"
+              startId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID).Outputs[Saída de Coluna Derivada]" />
+            <path
+              refId="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Coluna Derivada1]"
+              endId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 1]"
+              name="Saída de Coluna Derivada"
+              startId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Outputs[Saída de Coluna Derivada]" />
+            <path
+              refId="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Coluna Derivada2]"
+              endId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Inputs[Entrada Unir Tudo 2]"
+              name="Saída de Coluna Derivada"
+              startId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Outputs[Saída de Coluna Derivada]" />
+            <path
+              refId="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Conversão de Dados]"
+              endId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Inputs[Entrada de Conversão de Dados]"
+              name="Saída de Conversão de Dados"
+              startId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Outputs[Saída de Conversão de Dados]" />
+            <path
+              refId="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Conversão de Dados1]"
+              endId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types.Inputs[Entrada de Destino OLE DB]"
+              name="Saída de Conversão de Dados"
+              startId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Outputs[Saída de Conversão de Dados]" />
+            <path
+              refId="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Erro de Conversão de Dados]"
+              endId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID).Inputs[Entrada de Coluna Derivada]"
+              name="Saída de Erro de Conversão de Dados"
+              startId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID).Outputs[Saída de Erro de Conversão de Dados]" />
+            <path
+              refId="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Erro de Conversão de Dados1]"
+              endId="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task.Inputs[Entrada de Coluna Derivada]"
+              name="Saída de Erro de Conversão de Dados"
+              startId="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns.Outputs[Saída de Erro de Conversão de Dados]" />
+            <path
+              refId="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Origem OLE DB]"
+              endId="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty.Inputs[Entrada de Divisão Condicional]"
+              name="Saída de Origem OLE DB"
+              startId="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types.Outputs[Saída de Origem OLE DB]" />
+            <path
+              refId="Package\DFT - Extract and Load ODS_CallTypes.Paths[Unir Tudo Saída 1]"
+              endId="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects.Inputs[Entrada de Destino OLE DB]"
+              name="Unir Tudo Saída 1"
+              startId="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors.Outputs[Unir Tudo Saída 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Truncate Table ODS_CallTypes"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5542517e-e5ab-4ddd-b7a7-d74df534de9d}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Truncate Table ODS_CallTypes"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{f57ca61e-acd0-417e-bd49-20f2d3e9ca9a}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [ODS_CallCenter].[dbo].[CallTypes];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{aa31077c-f397-4210-8521-e4aac3ae67e0}"
+      DTS:From="Package\SQL - Truncate Table ODS_CallTypes"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DFT - Extract and Load ODS_CallTypes" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="263.2,41.6"
+          Id="Package\DFT - Extract and Load ODS_CallTypes"
+          TopLeft="62.499999900659,179.600000950496" />
+        <NodeLayout
+          Size="255.2,41.6"
+          Id="Package\SQL - Truncate Table ODS_CallTypes"
+          TopLeft="60,60" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="190.84999995033,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,78.000000950496"
+              Start="0,0"
+              End="0,70.500000950496">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,70.500000950496" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Extract and Load ODS_CallTypes">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Resize Columns"
+          TopLeft="178.199993046125,324.533333057828" />
+        <NodeLayout
+          Size="213.6,41.6"
+          Id="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info (CallTypeID)"
+          TopLeft="575.766643851334,114.533334090975" />
+        <NodeLayout
+          Size="284,41.6"
+          Id="Package\DFT - Extract and Load ODS_CallTypes\CSPL - Check if Call Type ID is null or empty"
+          TopLeft="127.433328333166,111.066667396757" />
+        <NodeLayout
+          Size="247.2,41.6"
+          Id="Package\DFT - Extract and Load ODS_CallTypes\DER - Error conversion (CallTypeID)"
+          TopLeft="650.766640871102,206.933331652747" />
+        <NodeLayout
+          Size="208,41.6"
+          Id="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types"
+          TopLeft="160.766660341952,22.5333335124122" />
+        <NodeLayout
+          Size="208.8,41.6"
+          Id="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types"
+          TopLeft="190.833325750298,420.400003182093" />
+        <NodeLayout
+          Size="300.8,41.6"
+          Id="Package\DFT - Extract and Load ODS_CallTypes\DCNV - Conversion unicode to int (Call Type ID)"
+          TopLeft="121.599995231629,214.200001549721" />
+        <NodeLayout
+          Size="233.6,43.2"
+          Id="Package\DFT - Extract and Load ODS_CallTypes\DER - Error info about resize task"
+          TopLeft="674.099973277252,323.000002045632" />
+        <NodeLayout
+          Size="220,41.6"
+          Id="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects"
+          TopLeft="1285.66662606928,198.066665723059" />
+        <NodeLayout
+          Size="181.6,41.6"
+          Id="Package\DFT - Extract and Load ODS_CallTypes\ALL - Technical Errors"
+          TopLeft="1025.76662596994,199.333334917492" />
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Conversão de Dados]"
+          TopLeft="273.299994138877,255.800001549721">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.7333315081069"
+              Start="0,0"
+              End="0,61.2333315081069">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.2333315081069" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Coluna Derivada2]"
+          TopLeft="790.899973277252,323.000002045632">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="325.666652692689,-82.0666671281391"
+              Start="0,0"
+              End="325.666652692689,-74.5666671281391">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-37.0333335640696" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-37.0333335640696"
+                    Point2="0,-41.0333335640696"
+                    Point3="4,-41.0333335640696" />
+                  <mssgle:LineSegment
+                    End="321.666652692689,-41.0333335640696" />
+                  <mssgle:CubicBezierSegment
+                    Point1="321.666652692689,-41.0333335640696"
+                    Point2="325.666652692689,-41.0333335640696"
+                    Point3="325.666652692689,-45.0333335640696" />
+                  <mssgle:LineSegment
+                    End="325.666652692689,-74.5666671281391" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Coluna Derivada1]"
+          TopLeft="897.966640871102,223.93333328512">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="127.799985098839,0"
+              Start="0,0"
+              End="120.299985098839,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="120.299985098839,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Coluna Derivada]"
+          TopLeft="682.566643851334,156.133334090975">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="433.999982118607,43.2000008265177"
+              Start="0,0"
+              End="433.999982118607,35.7000008265177">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.6000004132589" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.6000004132589"
+                    Point2="0,21.6000004132589"
+                    Point3="4,21.6000004132589" />
+                  <mssgle:LineSegment
+                    End="429.999982118607,21.6000004132589" />
+                  <mssgle:CubicBezierSegment
+                    Point1="429.999982118607,21.6000004132589"
+                    Point2="433.999982118607,21.6000004132589"
+                    Point3="433.999982118607,25.6000004132589" />
+                  <mssgle:LineSegment
+                    End="433.999982118607,35.7000008265177" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load ODS_CallTypes.Paths[Null or Empty]"
+          TopLeft="411.433328333166,133.600000743866">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="164.333315518168,0"
+              Start="0,0"
+              End="156.833315518168,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="156.833315518168,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="47.809724165334,5,61.2138671875,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load ODS_CallTypes.Paths[Not Null and Not Empty]"
+          TopLeft="270.716661782397,152.666667396757">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.5333341529634"
+              Start="0,0"
+              End="0,54.0333341529634">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.0333341529634" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-52.84193359375,21.2119795764817,105.6838671875,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load ODS_CallTypes.Paths[Unir Tudo Saída 1]"
+          TopLeft="1207.36662596994,219.500000320276">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="78.300000099335,0"
+              Start="0,0"
+              End="70.800000099335,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="70.800000099335,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Origem OLE DB]"
+          TopLeft="267.099994337559,64.1333335124122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.9333338843452"
+              Start="0,0"
+              End="0,39.4333338843452">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.4333338843452" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Erro de Conversão de Dados1]"
+          TopLeft="370.999993046125,344.96666755173">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="303.099980231127,0"
+              Start="0,0"
+              End="295.599980231127,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="295.599980231127,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="63.7167479280634,5,168.166484375,10.3349609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Erro de Conversão de Dados]"
+          TopLeft="422.399995231629,231.366666601234">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="228.366645639474,0"
+              Start="0,0"
+              End="220.866645639474,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="220.866645639474,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="26.3500806322368,5,168.166484375,10.3349609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load ODS_CallTypes.Paths[Saída de Conversão de Dados1]"
+          TopLeft="274.599993046125,366.133333057828">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.6333327041733,54.2666701242657"
+              Start="0,0"
+              End="20.6333327041733,46.7666701242657">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.1333350621328" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.1333350621328"
+                    Point2="0,27.1333350621328"
+                    Point3="4,27.1333350621328" />
+                  <mssgle:LineSegment
+                    End="16.6333327041733,27.1333350621328" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.6333327041733,27.1333350621328"
+                    Point2="20.6333327041733,27.1333350621328"
+                    Point3="20.6333327041733,31.1333350621328" />
+                  <mssgle:LineSegment
+                    End="20.6333327041733,46.7666701242657" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Extract and Load ODS_CallTypes\OLE_SRC - STA Call Types">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - ODS Call Types">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Extract and Load ODS_CallTypes\OLE_DST - Technical_Rejects">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

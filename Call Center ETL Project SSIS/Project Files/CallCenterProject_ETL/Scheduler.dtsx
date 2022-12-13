@@ -1,0 +1,783 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/24/2022 2:45:16 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-47EQI2IB"
+  DTS:CreatorName="LAPTOP-47EQI2IB\caiqu"
+  DTS:DTSID="{63C7AF43-A646-4A45-A463-664775A725F4}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.948.0"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="Scheduler"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{17CCAC7A-78E4-41BB-81CC-980EC748FEB7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Extract data from operational data store to datawarehouse"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{3E613264-91C3-42A5-9D54-1A1C89095FAF}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Extract data from operational data store to datawarehouse">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Extract data from operational data store to datawarehouse\Dimension table"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{5105EC31-E9A4-4590-8DCA-15E7C280742F}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Dimension table">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Extract data from operational data store to datawarehouse\Dimension table\EXE PKG - DWH - Dim Call Types"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Tarefa Executar Pacote"
+              DTS:DTSID="{0ce00147-5a5c-44b1-a9bc-622abf1d516f}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="EXE PKG - DWH - Dim Call Types"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>DWH - Dim Call Types.dtsx</PackageName>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Extract data from operational data store to datawarehouse\Dimension table\EXE PKG - DWH - Dim Employees"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Tarefa Executar Pacote"
+              DTS:DTSID="{1d9485a0-8743-4b6a-bc07-2bfd5f3d3a6b}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="EXE PKG - DWH - Dim Employees"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>DWH - Dim Employees.dtsx</PackageName>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Extract data from operational data store to datawarehouse\Dimension table.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{D290D6FE-5C61-427E-A29C-E4E0ECE35524}"
+              DTS:From="Package\Extract data from operational data store to datawarehouse\Dimension table\EXE PKG - DWH - Dim Call Types"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Extract data from operational data store to datawarehouse\Dimension table\EXE PKG - DWH - Dim Employees" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract data from operational data store to datawarehouse\EXE PKG - DWH - Fact Call Data"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarefa Executar Pacote"
+          DTS:DTSID="{c3a2cfe9-d3d4-41e1-a392-6f8ca96244d1}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXE PKG - DWH - Fact Call Data"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DWH - Fact Call Data.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract data from operational data store to datawarehouse.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{19FA5303-8571-4CF8-B4A5-727E0B8BF03E}"
+          DTS:From="Package\Extract data from operational data store to datawarehouse\Dimension table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Extract data from operational data store to datawarehouse\EXE PKG - DWH - Fact Call Data" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Extract data from souce to staging"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{5348E047-29E6-461D-8B55-69CDB9B497C2}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Extract data from souce to staging">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Extract data from souce to staging\EXE PKG - STA - Call Charges"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarefa Executar Pacote"
+          DTS:DTSID="{1cd9b66e-2912-4df5-9168-21fdd05df0aa}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXE PKG - STA - Call Charges"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>STA - Call Charges.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract data from souce to staging\EXE PKG - STA - Call Data"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarefa Executar Pacote"
+          DTS:DTSID="{eccace1b-477b-4043-9a6e-4057098dd909}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXE PKG - STA - Call Data"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>STA - Call Data.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract data from souce to staging\EXE PKG - STA - Call Types"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarefa Executar Pacote"
+          DTS:DTSID="{e2a03673-9017-4247-a63a-337833db3287}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXE PKG - STA - Call Types"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>STA - Call Types.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract data from souce to staging\EXE PKG - STA - Employees"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarefa Executar Pacote"
+          DTS:DTSID="{2d803158-c60a-446c-9f91-b0b3c3b0a502}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXE PKG - STA - Employees"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>STA - Employees.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract data from souce to staging\EXE PKG - STA - US States"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarefa Executar Pacote"
+          DTS:DTSID="{2295C2E9-EE02-4FC1-AFD3-DAF0442BC721}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXE PKG - STA - US States"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>STA - US States.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract data from souce to staging.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{DFF8FFBA-A1E0-4C7B-A650-FE78DD944F25}"
+          DTS:From="Package\Extract data from souce to staging\EXE PKG - STA - US States"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Extract data from souce to staging\EXE PKG - STA - Employees" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract data from souce to staging.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{589D40AA-A603-4480-A810-97FB59921630}"
+          DTS:From="Package\Extract data from souce to staging\EXE PKG - STA - Employees"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Extract data from souce to staging\EXE PKG - STA - Call Types" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract data from souce to staging.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{B5F05A50-235A-44A7-AE23-5E6A0317C67C}"
+          DTS:From="Package\Extract data from souce to staging\EXE PKG - STA - Call Types"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Extract data from souce to staging\EXE PKG - STA - Call Charges" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract data from souce to staging.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{40B6C761-9464-47BC-8AC0-6C6C9B7AD77A}"
+          DTS:From="Package\Extract data from souce to staging\EXE PKG - STA - Call Charges"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Extract data from souce to staging\EXE PKG - STA - Call Data" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Extract data from staging to operational data store"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{71908970-8687-42EF-89C8-DA27CC68122E}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Extract data from staging to operational data store">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Extract data from staging to operational data store\EXE PKG - ODS - Call Charges"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarefa Executar Pacote"
+          DTS:DTSID="{9f35ff1b-ddb1-4af7-a6f0-f7e982c63b79}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXE PKG - ODS - Call Charges"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>ODS - Call Charges.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract data from staging to operational data store\EXE PKG - ODS - Call Data"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarefa Executar Pacote"
+          DTS:DTSID="{2ee12866-3b1c-40c8-9b33-d744d8d091a0}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXE PKG - ODS - Call Data"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>ODS - Call Data.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract data from staging to operational data store\EXE PKG - ODS - Call Types"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarefa Executar Pacote"
+          DTS:DTSID="{923845bb-0793-40d8-82a2-caa0702e31e4}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXE PKG - ODS - Call Types"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>ODS - Call Types.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract data from staging to operational data store\EXE PKG - ODS - Employees"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarefa Executar Pacote"
+          DTS:DTSID="{f346b635-efd9-40d9-9849-5d4bf1bdce94}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXE PKG - ODS - Employees"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>ODS - Employees.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract data from staging to operational data store.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{21570AEC-10A0-43C8-96E7-BE0E64969D9C}"
+          DTS:From="Package\Extract data from staging to operational data store\EXE PKG - ODS - Employees"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Extract data from staging to operational data store\EXE PKG - ODS - Call Types" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract data from staging to operational data store.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{2D55C995-2321-4A5D-84A9-5EAC45E9235B}"
+          DTS:From="Package\Extract data from staging to operational data store\EXE PKG - ODS - Call Types"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Extract data from staging to operational data store\EXE PKG - ODS - Call Charges" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract data from staging to operational data store.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{743D22AB-6BAF-405F-9302-A1ABF1605EDB}"
+          DTS:From="Package\Extract data from staging to operational data store\EXE PKG - ODS - Call Charges"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Extract data from staging to operational data store\EXE PKG - ODS - Call Data" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8B34E6F0-313E-4793-94E9-86CB7CC35890}"
+      DTS:From="Package\Extract data from souce to staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Extract data from staging to operational data store" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{B4E65D04-7743-4697-97EB-9E4B7B3C152A}"
+      DTS:From="Package\Extract data from staging to operational data store"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Extract data from operational data store to datawarehouse" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="236.8,41.6"
+          Id="Package\Extract data from operational data store to datawarehouse\Dimension table\EXE PKG - DWH - Dim Call Types"
+          TopLeft="42.7999940395354,36.5333390087554" />
+        <NodeLayout
+          Size="239.2,41.6"
+          Id="Package\Extract data from operational data store to datawarehouse\Dimension table\EXE PKG - DWH - Dim Employees"
+          TopLeft="375.299980827173,39.3333382235636" />
+        <EdgeLayout
+          Id="Package\Extract data from operational data store to datawarehouse\Dimension table.PrecedenceConstraints[Constraint 1]"
+          TopLeft="279.599994039535,58.7333386161595">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="95.6999867876375,0"
+              Start="0,0"
+              End="88.1999867876375,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="88.1999867876375,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="660,136"
+          Size="660,179.2"
+          Id="Package\Extract data from operational data store to datawarehouse\Dimension table"
+          TopLeft="75.7332978354573,74.8000020249685" />
+        <NodeLayout
+          Size="232.8,43.2"
+          Id="Package\Extract data from operational data store to datawarehouse\EXE PKG - DWH - Fact Call Data"
+          TopLeft="286.566622791027,304.000004380545" />
+        <EdgeLayout
+          Id="Package\Extract data from operational data store to datawarehouse.PrecedenceConstraints[Constraint 1]"
+          TopLeft="404.349960313242,254.000002024969">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.0000023555769"
+              Start="0,0"
+              End="0,42.5000023555769">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5000023555769" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="805.6,400.8"
+          Size="805.6,444"
+          Id="Package\Extract data from operational data store to datawarehouse"
+          TopLeft="226.69999811252,761.20000020663" />
+        <NodeLayout
+          Size="222.4,41.6"
+          Id="Package\Extract data from souce to staging\EXE PKG - STA - Call Charges"
+          TopLeft="489.299973277252,132.73333630191" />
+        <NodeLayout
+          Size="204.8,41.6"
+          Id="Package\Extract data from souce to staging\EXE PKG - STA - Call Data"
+          TopLeft="626.799967813493,54.0666682026123" />
+        <NodeLayout
+          Size="211.2,41.6"
+          Id="Package\Extract data from souce to staging\EXE PKG - STA - Call Types"
+          TopLeft="325.966646434202,53.8666690084671" />
+        <NodeLayout
+          Size="213.6,41.6"
+          Id="Package\Extract data from souce to staging\EXE PKG - STA - Employees"
+          TopLeft="190.1333184984,138.600003822645" />
+        <NodeLayout
+          Size="208.8,41.6"
+          Id="Package\Extract data from souce to staging\EXE PKG - STA - US States"
+          TopLeft="57.6333237634771,50.2000031201047" />
+        <EdgeLayout
+          Id="Package\Extract data from souce to staging.PrecedenceConstraints[Constraint]"
+          TopLeft="162.033323763477,91.8000031201046">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="134.899994734923,46.80000070254"
+              Start="0,0"
+              End="134.899994734923,39.30000070254">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.40000035127" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.40000035127"
+                    Point2="0,23.40000035127"
+                    Point3="4,23.40000035127" />
+                  <mssgle:LineSegment
+                    End="130.899994734923,23.40000035127" />
+                  <mssgle:CubicBezierSegment
+                    Point1="130.899994734923,23.40000035127"
+                    Point2="134.899994734923,23.40000035127"
+                    Point3="134.899994734923,27.40000035127" />
+                  <mssgle:LineSegment
+                    End="134.899994734923,39.30000070254" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract data from souce to staging.PrecedenceConstraints[Constraint 1]"
+          TopLeft="331.199985165067,138.600003822645">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="100.366661269135,-43.1333348141776"
+              Start="0,0"
+              End="100.366661269135,-35.6333348141776">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-13.4457502891544" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-13.4457502891544"
+                    Point2="0,-17.4457502891544"
+                    Point3="4,-17.4457502891544" />
+                  <mssgle:LineSegment
+                    End="96.3666612691351,-17.4457502891544" />
+                  <mssgle:CubicBezierSegment
+                    Point1="96.3666612691351,-17.4457502891544"
+                    Point2="100.366661269135,-17.4457502891544"
+                    Point3="100.366661269135,-21.4457502891544" />
+                  <mssgle:LineSegment
+                    End="100.366661269135,-35.6333348141776" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract data from souce to staging.PrecedenceConstraints[Constraint 2]"
+          TopLeft="465.433313100869,95.4666690084671">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="135.066660176383,37.2666672934425"
+              Start="0,0"
+              End="135.066660176383,29.7666672934425">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.0747872209564" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.0747872209564"
+                    Point2="0,15.0747872209564"
+                    Point3="4,15.0747872209564" />
+                  <mssgle:LineSegment
+                    End="131.066660176383,15.0747872209564" />
+                  <mssgle:CubicBezierSegment
+                    Point1="131.066660176383,15.0747872209564"
+                    Point2="135.066660176383,15.0747872209564"
+                    Point3="135.066660176383,19.0747872209564" />
+                  <mssgle:LineSegment
+                    End="135.066660176383,29.7666672934425" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract data from souce to staging.PrecedenceConstraints[Constraint 3]"
+          TopLeft="636.233306610585,132.73333630191">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="92.9666612029084,-37.0666680992973"
+              Start="0,0"
+              End="92.9666612029084,-29.5666680992973">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-10.9855243887159" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-10.9855243887159"
+                    Point2="0,-14.9855243887159"
+                    Point3="4,-14.9855243887159" />
+                  <mssgle:LineSegment
+                    End="88.9666612029084,-14.9855243887159" />
+                  <mssgle:CubicBezierSegment
+                    Point1="88.9666612029084,-14.9855243887159"
+                    Point2="92.9666612029084,-14.9855243887159"
+                    Point3="92.9666612029084,-18.9855243887159" />
+                  <mssgle:LineSegment
+                    End="92.9666612029084,-29.5666680992973" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="918.4,259.2"
+          Size="918.4,302.4"
+          Id="Package\Extract data from souce to staging"
+          TopLeft="171.666659845247,62.533333595064" />
+        <NodeLayout
+          Size="224.8,41.6"
+          Id="Package\Extract data from staging to operational data store\EXE PKG - ODS - Call Charges"
+          TopLeft="498.833313730029,31.2666679133311" />
+        <NodeLayout
+          Size="207.2,41.6"
+          Id="Package\Extract data from staging to operational data store\EXE PKG - ODS - Call Data"
+          TopLeft="717.166638387576,91.0666683885789" />
+        <NodeLayout
+          Size="213.6,41.6"
+          Id="Package\Extract data from staging to operational data store\EXE PKG - ODS - Call Types"
+          TopLeft="247.999990363916,107.333335991966" />
+        <NodeLayout
+          Size="216,41.6"
+          Id="Package\Extract data from staging to operational data store\EXE PKG - ODS - Employees"
+          TopLeft="74.6666639182303,29.1333361779321" />
+        <EdgeLayout
+          Id="Package\Extract data from staging to operational data store.PrecedenceConstraints[Constraint]"
+          TopLeft="182.66666391823,70.7333361779323">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="172.133326445686,36.5999998140337"
+              Start="0,0"
+              End="172.133326445686,29.0999998140337">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.2999999070169" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.2999999070169"
+                    Point2="0,18.2999999070169"
+                    Point3="4,18.2999999070169" />
+                  <mssgle:LineSegment
+                    End="168.133326445686,18.2999999070169" />
+                  <mssgle:CubicBezierSegment
+                    Point1="168.133326445686,18.2999999070169"
+                    Point2="172.133326445686,18.2999999070169"
+                    Point3="172.133326445686,22.2999999070169" />
+                  <mssgle:LineSegment
+                    End="172.133326445686,29.0999998140337" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract data from staging to operational data store.PrecedenceConstraints[Constraint 1]"
+          TopLeft="389.066657030583,107.333335991966">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="222.166656699446,-34.4666680786345"
+              Start="0,0"
+              End="222.166656699446,-26.9666680786345">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-9.94042188459275" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-9.94042188459275"
+                    Point2="0,-13.9404218845928"
+                    Point3="4,-13.9404218845928" />
+                  <mssgle:LineSegment
+                    End="218.166656699446,-13.9404218845928" />
+                  <mssgle:CubicBezierSegment
+                    Point1="218.166656699446,-13.9404218845928"
+                    Point2="222.166656699446,-13.9404218845928"
+                    Point3="222.166656699446,-17.9404218845928" />
+                  <mssgle:LineSegment
+                    End="222.166656699446,-26.9666680786345" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract data from staging to operational data store.PrecedenceConstraints[Constraint 2]"
+          TopLeft="723.633313730029,52.0666679133313">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="97.1333246575468,39.0000004752476"
+              Start="0,0"
+              End="97.1333246575468,31.5000004752476">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="93.1333246575468,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="93.1333246575468,0"
+                    Point2="97.1333246575468,0"
+                    Point3="97.1333246575468,4" />
+                  <mssgle:LineSegment
+                    End="97.1333246575468,31.5000004752476" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="1026.4,212.8"
+          Size="1026.4,256"
+          Id="Package\Extract data from staging to operational data store"
+          TopLeft="120.833328531848,419.000002376238" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="632.449994188548,364.933333595064">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54.066668781174"
+              Start="0,0"
+              End="0,46.566668781174">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.566668781174" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="631.766663322184,675.000002376238">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,86.199997830392"
+              Start="0,0"
+              End="0,78.699997830392">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,78.699997830392" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

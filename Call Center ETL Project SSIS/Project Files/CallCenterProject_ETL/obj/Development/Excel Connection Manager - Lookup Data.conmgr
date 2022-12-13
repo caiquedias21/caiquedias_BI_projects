@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="Excel Connection Manager - Lookup Data"
+  DTS:DTSID="{0C2B8D07-3170-4008-A842-6C145786A3AF}"
+  DTS:CreationName="EXCEL">
+  <DTS:PropertyExpression
+    DTS:Name="ExcelFilePath">@[$Project::DataFolderPath] + "\\Lookup data.xls"</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="0"
+      DTS:ConnectRetryInterval="0"
+      DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Caique\DSTI\Datawarehouse ETL\CallCenterProject_ETL\Data\Lookup data.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

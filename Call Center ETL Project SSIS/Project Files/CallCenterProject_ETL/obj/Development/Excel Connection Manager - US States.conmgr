@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="Excel Connection Manager - US States"
+  DTS:DTSID="{A556600A-8C4E-4245-9352-D29807DAA6D8}"
+  DTS:CreationName="EXCEL">
+  <DTS:PropertyExpression
+    DTS:Name="ExcelFilePath">@[$Project::DataFolderPath] + "\\US States.xls"</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="0"
+      DTS:ConnectRetryInterval="0"
+      DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Caique\DSTI\Datawarehouse ETL\CallCenterProject_ETL\Data\US States.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

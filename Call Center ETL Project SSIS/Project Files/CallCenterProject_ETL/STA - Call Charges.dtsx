@@ -1,0 +1,709 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/22/2022 10:46:08 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-47EQI2IB"
+  DTS:CreatorName="LAPTOP-47EQI2IB\caiqu"
+  DTS:DTSID="{8F99DA17-7747-4477-A0A6-1DC8A7839B77}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.948.0"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="STA - Call Carges"
+  DTS:PackageType="5"
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{6A40279D-0FC0-45E4-9125-D8A28FD6C470}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager - Call Charges]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{EFBA7B4A-74FE-41BF-9632-C76305CE2340}"
+      DTS:ObjectName="Excel Connection Manager - Call Charges">
+      <DTS:PropertyExpression
+        DTS:Name="ExcelFilePath">@[$Project::DataFolderPath] + "\\Call Charges.xls"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Caique\DSTI\Datawarehouse ETL\CallCenterProject_ETL\Data\Call Charges.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ServerName.STA_DatabaseName]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{EAFF23B3-6605-4527-BEE3-CC6A93E49860}"
+      DTS:ObjectName="ServerName.STA_DatabaseName">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Project::STA_DatabaseName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Project::ServerName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=STA_CallCenter;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-STA - US States-{EAFF23B3-6605-4527-BEE3-CC6A93E49860}localhost.STA_CallCenter;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Extract and Load STA_CallCharges"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{70A395C3-CF48-4523-80BA-03EB7B3626B4}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Extract and Load STA_CallCharges"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Divisão Condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Encaminha colunas de dados para saídas diferentes, dependendo do conteúdo dos dados. Use condições (expressões do SSIS) para especificar quais linhas são encaminhadas. Por exemplo, separe os registros que precisam ser limpos daqueles que estão prontos para serem carregados ou encaminhe somente um subconjunto de registros."
+              name="CSPL - Null Data Control"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Inputs[Entrada de Divisão Condicional]"
+                  description="Entrada para a Transformação Divisão Condicional"
+                  name="Entrada de Divisão Condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Inputs[Entrada de Divisão Condicional].Columns[Call Type ]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Call Type "
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Type ]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Outputs[Null Data]"
+                  description="Saída 1 da Transformação Divisão Condicional"
+                  errorOrTruncationOperation="Computação"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Null Data"
+                  synchronousInputId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Inputs[Entrada de Divisão Condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica a expressão. Essa versão da expressão usa identificadores de linhagem, em vez de nomes de colunas."
+                      name="Expression">[ISNULL](#{Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from "Call Charges".Outputs[Saída de Origem do Excel].Columns[Call Type ]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica a versão amigável da expressão. Essa versão de expressão usa nomes de colunas."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL([Call Type ])</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica a posição da condição na lista de condições que a transformação avalia. A ordem de avaliação é do menor para o maior valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Outputs[Not Null Data]"
+                  description="Saída Padrão da Transformação Divisão Condicional"
+                  exclusionGroup="1"
+                  name="Not Null Data"
+                  synchronousInputId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Inputs[Entrada de Divisão Condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Outputs[Saída de Erro de Divisão Condicional]"
+                  description="Saída de Erro da Transformação Divisão Condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Divisão Condicional"
+                  synchronousInputId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Inputs[Entrada de Divisão Condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Outputs[Saída de Erro de Divisão Condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Outputs[Saída de Erro de Divisão Condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Outputs[Saída de Erro de Divisão Condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Outputs[Saída de Erro de Divisão Condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origem do Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;1"
+              description="Origem do Excel"
+              name="EX_SRC - Extract Data from &quot;Call Charges&quot;"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">'Call charges per year$'</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="O mapeamento de parâmetros no comando SQL para variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager - Call Charges]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager - Call Charges]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel]"
+                  name="Saída de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Type ]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[Call Type ]"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Type ]"
+                      name="Call Type "
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2018)]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[Call Charges (2018)]"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2018)]"
+                      name="Call Charges (2018)"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2019)]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[Call Charges (2019)]"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2019)]"
+                      name="Call Charges (2019)"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2020)]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[Call Charges (2020)]"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2020)]"
+                      name="Call Charges (2020)"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2021)]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[Call Charges (2021)]"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2021)]"
+                      name="Call Charges (2021)"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[Call Type ]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call Type " />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[Call Charges (2018)]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call Charges (2018)" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[Call Charges (2019)]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call Charges (2019)" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[Call Charges (2020)]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call Charges (2020)" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[Call Charges (2021)]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call Charges (2021)" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[Call Type ]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[Call Type ]"
+                      name="Call Type " />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[Call Charges (2018)]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[Call Charges (2018)]"
+                      name="Call Charges (2018)" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[Call Charges (2019)]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[Call Charges (2019)]"
+                      name="Call Charges (2019)" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[Call Charges (2020)]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[Call Charges (2020)]"
+                      name="Call Charges (2020)" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[Call Charges (2021)]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[Call Charges (2021)]"
+                      name="Call Charges (2021)" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="OLE_DST - Load Data to STA_CallCharges"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[dbo].[CallCharges]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ServerName.STA_DatabaseName]"
+                  connectionManagerRefId="Package.ConnectionManagers[ServerName.STA_DatabaseName]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].Columns[Call Type ]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Call Type "
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].ExternalColumns[Call Type ]"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Type ]" />
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].Columns[Call Charges (2018)]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Call Charges (2018)"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].ExternalColumns[Call Charges (2018)]"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2018)]" />
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].Columns[Call Charges (2019)]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Call Charges (2019)"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].ExternalColumns[Call Charges (2019)]"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2019)]" />
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].Columns[Call Charges (2020)]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Call Charges (2020)"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].ExternalColumns[Call Charges (2020)]"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2020)]" />
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].Columns[Call Charges (2021)]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Call Charges (2021)"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].ExternalColumns[Call Charges (2021)]"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel].Columns[Call Charges (2021)]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].ExternalColumns[Call Type ]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call Type " />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].ExternalColumns[Call Charges (2018)]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call Charges (2018)" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].ExternalColumns[Call Charges (2019)]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call Charges (2019)" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].ExternalColumns[Call Charges (2020)]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call Charges (2020)" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB].ExternalColumns[Call Charges (2021)]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call Charges (2021)" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Extract and Load STA_CallCharges.Paths[Not Null Data]"
+              endId="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges.Inputs[Entrada de Destino OLE DB]"
+              name="Not Null Data"
+              startId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Outputs[Not Null Data]" />
+            <path
+              refId="Package\DFT - Extract and Load STA_CallCharges.Paths[Saída de Origem do Excel]"
+              endId="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control.Inputs[Entrada de Divisão Condicional]"
+              name="Saída de Origem do Excel"
+              startId="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;.Outputs[Saída de Origem do Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Truncate Table STA_CallCharges"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4ad47bcf-7232-4f62-9fb7-9eaee6aee365}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Truncate Table STA_CallCharges"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EAFF23B3-6605-4527-BEE3-CC6A93E49860}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [STA_CallCenter].[dbo].[CallCharges];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{90511EE5-D2CB-4C41-AA52-3D17E0658895}"
+      DTS:From="Package\SQL - Truncate Table STA_CallCharges"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DFT - Extract and Load STA_CallCharges" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="272,41.6"
+          Id="Package\DFT - Extract and Load STA_CallCharges"
+          TopLeft="180.499993046125,203.966668243938" />
+        <NodeLayout
+          Size="264,41.6"
+          Id="Package\SQL - Truncate Table STA_CallCharges"
+          TopLeft="209.99999165535,66.7333338636822" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="341.99999165535,108.333333863682">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-25.4999986092249,95.6333343802558"
+              Start="0,0"
+              End="-25.4999986092249,88.1333343802558">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.8166671901279" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.8166671901279"
+                    Point2="0,47.8166671901279"
+                    Point3="-4,47.8166671901279" />
+                  <mssgle:LineSegment
+                    End="-21.4999986092249,47.8166671901279" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-21.4999986092249,47.8166671901279"
+                    Point2="-25.4999986092249,47.8166671901279"
+                    Point3="-25.4999986092249,51.8166671901279" />
+                  <mssgle:LineSegment
+                    End="-25.4999986092249,88.1333343802558" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Extract and Load STA_CallCharges">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="193.6,41.6"
+          Id="Package\DFT - Extract and Load STA_CallCharges\CSPL - Null Data Control"
+          TopLeft="157.999997516473,131.900000289281" />
+        <NodeLayout
+          Size="280,41.6"
+          Id="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges"
+          TopLeft="126.333329723941,324.966668967141" />
+        <NodeLayout
+          Size="280,41.6"
+          Id="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;"
+          TopLeft="108.833329227236,33.2333335537381" />
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load STA_CallCharges.Paths[Not Null Data]"
+          TopLeft="254.799997516473,173.500000289281">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.5333322074678,151.46666867786"
+              Start="0,0"
+              End="11.5333322074678,143.96666867786">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,71.73333433893" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,71.73333433893"
+                    Point2="0,75.73333433893"
+                    Point3="4,75.73333433893" />
+                  <mssgle:LineSegment
+                    End="7.53333220746782,75.73333433893" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.53333220746782,75.73333433893"
+                    Point2="11.5333322074678,75.73333433893"
+                    Point3="11.5333322074678,79.73333433893" />
+                  <mssgle:LineSegment
+                    End="11.5333322074678,143.96666867786" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-24.1266932712661,80.73333433893,59.78671875,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load STA_CallCharges.Paths[Saída de Origem do Excel]"
+          TopLeft="251.816663371855,74.8333335537381">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.0666667355429"
+              Start="0,0"
+              End="0,49.5666667355429">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5666667355429" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Extract and Load STA_CallCharges\OLE_DST - Load Data to STA_CallCharges">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Extract and Load STA_CallCharges\EX_SRC - Extract Data from &quot;Call Charges&quot;">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

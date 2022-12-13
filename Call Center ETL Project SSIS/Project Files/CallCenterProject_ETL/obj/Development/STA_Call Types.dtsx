@@ -1,0 +1,459 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/22/2022 7:29:54 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-47EQI2IB"
+  DTS:CreatorName="LAPTOP-47EQI2IB\caiqu"
+  DTS:DTSID="{5A2C7AB1-E461-4588-B1EC-44FEE0FE6F3C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.948.0"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{9E665EA2-52F9-442E-81EC-7E82E4C23E0E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager - Lookup Data]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{0C2B8D07-3170-4008-A842-6C145786A3AF}"
+      DTS:ObjectName="Excel Connection Manager - Lookup Data">
+      <DTS:PropertyExpression
+        DTS:Name="ExcelFilePath">@[$Project::DataFolderPath] + "\\Lookup data.xls"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Caique\DSTI\Datawarehouse ETL\CallCenterProject_ETL\Data\Lookup data.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ServerName.STA_DatabaseName]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E41E89AB-BA8C-4931-801D-49FF09D8A42A}"
+      DTS:ObjectName="ServerName.STA_DatabaseName">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Project::STA_DatabaseName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Project::ServerName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=STA_CallCenter;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{E41E89AB-BA8C-4931-801D-49FF09D8A42A}localhost.STA_CallCenter;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Extract and Load STA_CallTypes"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{4320AA1D-33B2-41F5-88AA-49D7C0F6710F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Extract and Load STA_CallTypes"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origem do Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;1"
+              description="Origem do Excel"
+              name="EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">'Call Types$'</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="O mapeamento de parâmetros no comando SQL para variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager - Lookup Data]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager - Lookup Data]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel]"
+                  name="Saída de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel].Columns[CallTypeID]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[CallTypeID]"
+                      lineageId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel].Columns[CallTypeID]"
+                      name="CallTypeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel].Columns[CallTypeLabel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[CallTypeLabel]"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel].Columns[CallTypeLabel]"
+                      name="CallTypeLabel"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[CallTypeID]"
+                      dataType="r8"
+                      name="CallTypeID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel].ExternalColumns[CallTypeLabel]"
+                      dataType="wstr"
+                      length="255"
+                      name="CallTypeLabel" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Erro de Origem do Excel]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[CallTypeID]"
+                      dataType="r8"
+                      lineageId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[CallTypeID]"
+                      name="CallTypeID" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[CallTypeLabel]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[CallTypeLabel]"
+                      name="CallTypeLabel" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="OLE_DST - Load Data to STA_CallTypes"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[dbo].[CallTypes]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ServerName.STA_DatabaseName]"
+                  connectionManagerRefId="Package.ConnectionManagers[ServerName.STA_DatabaseName]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Inputs[Entrada de Destino OLE DB].Columns[CallTypeID]"
+                      cachedDataType="r8"
+                      cachedName="CallTypeID"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Inputs[Entrada de Destino OLE DB].ExternalColumns[CallTypeID]"
+                      lineageId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel].Columns[CallTypeID]" />
+                    <inputColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Inputs[Entrada de Destino OLE DB].Columns[CallTypeLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CallTypeLabel"
+                      externalMetadataColumnId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Inputs[Entrada de Destino OLE DB].ExternalColumns[CallTypeLabel]"
+                      lineageId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel].Columns[CallTypeLabel]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Inputs[Entrada de Destino OLE DB].ExternalColumns[CallTypeID]"
+                      dataType="wstr"
+                      length="255"
+                      name="CallTypeID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Inputs[Entrada de Destino OLE DB].ExternalColumns[CallTypeLabel]"
+                      dataType="wstr"
+                      length="255"
+                      name="CallTypeLabel" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Extract and Load STA_CallTypes.Paths[Saída de Origem do Excel]"
+              endId="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes.Inputs[Entrada de Destino OLE DB]"
+              name="Saída de Origem do Excel"
+              startId="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;.Outputs[Saída de Origem do Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Truncate Table STA_CallTypes"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{da0fec20-aaf4-4ded-b141-d4d07b2b7cf1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Truncate Table STA_CallTypes"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E41E89AB-BA8C-4931-801D-49FF09D8A42A}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [STA_CallCenter].[dbo].[Employees];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{EE61B30D-42AB-4992-BC56-FA96177FE05A}"
+      DTS:From="Package\SQL - Truncate Table STA_CallTypes"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DFT - Extract and Load STA_CallTypes" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="260.8,41.6"
+          Id="Package\DFT - Extract and Load STA_CallTypes"
+          TopLeft="228.833324458864,190.100001467069" />
+        <NodeLayout
+          Size="252.8,41.6"
+          Id="Package\SQL - Truncate Table STA_CallTypes"
+          TopLeft="232.49999076128,56.3333337810304" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="359.066657610073,97.9333337810304">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,92.1666676860387"
+              Start="0,0"
+              End="0,84.6666676860387">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,84.6666676860387" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Extract and Load STA_CallTypes">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="334.4,41.6"
+          Id="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;"
+          TopLeft="197.499994536241,64.3333333677716" />
+        <NodeLayout
+          Size="268.8,41.6"
+          Id="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes"
+          TopLeft="235.833323962159,218.400001735687" />
+        <EdgeLayout
+          Id="Package\DFT - Extract and Load STA_CallTypes.Paths[Saída de Origem do Excel]"
+          TopLeft="367.4666592492,105.933333367772">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,112.466668367916"
+              Start="0,0"
+              End="0,104.966668367916">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,104.966668367916" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Extract and Load STA_CallTypes\EX_SRC - Extract Data from &quot;Lookup Data(Call Types)&quot;">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Extract and Load STA_CallTypes\OLE_DST - Load Data to STA_CallTypes">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
