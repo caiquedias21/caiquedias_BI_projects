@@ -1,72 +1,78 @@
-## Welcome to Data Analysis using CRISP-DM
+## Welcome to Machine Learning Goodreads Project
 In this project we will analyse the Goodreads-books dataset from the Kaggle website. 
 
 ### Table of Contents
 
 1. [Installation](#installation)
-2. [Motivation](#motivation)
-3. [What is CRISP-DM?](#CRISP-DM)
-4. [Queries](#Queries)
-4. [Jupyter Notebook File (*.ipynb) Descriptions](#files)
-4. [Summary Results](#summaryresults)
-5. [Licensing, Authors, and Acknowledgements](#licensing)
+2. [Methodology](#methodology)
+3. [Queries](#Questions)
+6. [Summary Results](#results)
 
 ## Installation <a name="installation"></a>
 
 The python notebook files in this repo should run with Anaconda distribution of Python versions 3.*.
 
-To explore this project please download the dataset (books.csv) and the three python notebooks.
+You can extract the files to a folder.
 
-You can either upload the files using Jupyter notebook which will automatically place these files in the current working directory of your Python installation or place these files in the current working directory and then run the notebooks.
+books.csv :  It’s the dataset that will be used for this project.
 
-Hint: To check for the current working directory using the available notebooks just type os.getcwd() in a cell and run it. If you would like to change the current working directory before running these notebooks, use the os.chdir function, e.g. if your current working path is c:\projects, the statement you would want to execute is os.chdir("c:&#92;&#92;projects").
+GoodReads ML Project Report.docx : The project report.
 
-## Motivation<a name="motivation"></a>
+Project_Description_ML_DA_2022.pdf : It’s the description and requirements of the project
 
-As a software developer I always wanted to develop a second hobby like reading non-technical and interesting books. Recently, I was reading reviews about some non-technical books on websites like Amazon.com and picked a list of good books for my kid's Reading Counts test. During this occasion I stumbled upon https://www.goodreads.com.com and noticed that the site provides not only a good list of books to read but also questions on books to test your knowledge of the content. When I saw the Goodreads-books dataset in Kaggle.com, I was immediately interested to explore it. But how do I use the CRISP-DM data mining methodology on this dataset and explore it? I wanted to spend time and do an Exploratory Data Analysis (EDA) on this dataset, at the same time understand the CRISP-DM methodology. So, here I am with this Good-reads repo.
+ProjectGoodReads.ipynb : It’s the entire code of the project in Jupyter Notebook. It’s highly recommended to run it with Anaconda distribution of Python versions 3.
 
-## What is CRISP-DM?<a name="CRISP-DM"></a>
+You can either upload the files using Jupyter notebook or place these files in the current working directory and then run the notebooks with a Python interpreter.
 
-CRISP-DM stands for Cross Industry Standard Process for Data Mining. It provides a structured approach to planning a data mining project.
-The process involves six main steps for data mining.
+## Methodology<a name="methodology"></a>
 
-![alt text](Images/CRISP-DM.png "CRISP-DM Methodology")
+In this machine learning project, I will try to follow exactly the methodology below.
 
-Our main aim with this repo is to provide a practical understanding of this methodology and not to rewrite the entire documentation about each steps. These are already available online. For a detailed information about each steps in this methodology please checkout https://www.datasciencecentral.com/profiles/blogs/crisp-dm-a-standard-methodology-to-ensure-a-good-outcome.
+Data preparation :  It’s the stage at which the dataset will be analyzed and I’ll try to understand it. It’s necessary to arouse my curiosity and ask intelligent questions for queries. This step will compose most of the work, because after analyzing them, I will apply transformations to prepare them for model training.
+
+Model training : in this step, I will import several machine learning models from the scikit learn library. I will use part of the dataset to train these models to fit them.
+
+Model optimization : This step and the one below work together. Because the model evaluation is the main indication that the model is not optimized. Numerous tests and parameter changes were made to improve the model. 
+
+Model evaluation : The evaluation is super important to say if all the dataset preparation and the chosen models were appropriate. If the result of the evaluation is bad, we will go back to previous steps.
+
+Model maintenance : It’s the debug step.
+
+Deployment : After the entire process that is carried out in a development environment, this project will be put into production.
+
 
 ## Queries :thinking: <a name="Questions"></a>
 
 To get more insights about the Goodreads-books dataset, I wanted to find answers to the following questions: 
 
-1. Which authors wrote the most books (peek into the top 10)?
+1. There is any kind of correlation between the columns ?
 
-2. Who are the top 10 highly rated and the bottom 5 poorly rated authors?
+2. How the target column is distributed ?
 
-3. Did the books with more text reviews receive higher ratings?
+3. What are the top 10 best rated books ?
 
-4. Did the ratings for Harry Potter series follow a trend?
+4. What are the top 10 best rated books with a higher total ratings count than the average ?
 
-5. How are books distributed across different languages?
+5. What are the 10 authors who have more books with average_rate and ratings_count longer than average ?
 			   
-## Jupyter Notebook File Descriptions <a name="files"></a>
+6. What is the top 10 most rated books ?
 
-There are three python notebooks attached to this repo. Each of these notebooks explore the pragmatic steps of the CRISP-DM methodology to understand the dataset and infer useful insights from it.
+7. What is the top 10 authors who own more books ?
 
-1. **DataExploration.ipynb**
-     - This notebook explores the data to understand each features individually. We perform a univariate descriptive analysis on each feature to understand the data better. We then create plots like Histograms and Box-plots for the quantitative variables and look at the breakdown of unique values for the qualitative variables.
-				
-2. **DataAnalysis.ipynb**
-     - This notebook looks at each features and performs datamining analysis on the selected input variables (X's) to predict the average rating (Y) for a book. We have split the data into two subsets based on high and low user ratings for each books. We then trained and tested two models to predict average ratings on these two subset data. Finally, we understood the model quality based on the average prediction errors by looking at the Mean Absolute Error (MAE), Mean Squared Error (MSE) and Root Mean Squared Error (RMSE).
+8. What is the top 10 longest books ?   
 
-3. **Queries.ipynb**
-     - This notebook looks at the business related queries we wanted to ponder in the Queries section above. We do this by using break-down analysis and applying previous knowledge we gained about the data using the other two notebooks.
+9. What is the top 15 publishers by number of publications ?
+
+10. What is the bottom 5 poorly rated authors (average_rate < 3) ?
+
+11. Did the books with more text reviews receive higher ratings ?
+
+12. Did the books with more reviews receive higher ratings ?
 			   
 ## Summary Results<a name="results"></a>
 
-The results of our data exploration involving a thorough understanding of all the features in the dataset are summarized in the DataExploration.ipynb notebook. We created two Linear Regression model's and predicted the average rating of test set cases using the same. The model evaluation part is summarized in the DataAnalysis.ipynb notebook. Finally, we answered the important business questions by exploring the dataset further and finding more insights from it. This is documented in the last Python notebook Queries.ipynb. 
+We can observe that the results were quite similar. The best model is the Random Forest model for presenting the lowest values. The fit took a little while to execute, a sign that there is still a lot of optimization work to be done. The data processing, the choice and parameters of the model directly influence this value.
 
-For more insights from a business use case perspective of the various techical analysis performed in this repo, please check out my blog post [here](https://medium.com/@karthic.guna/do-you-love-reading-lets-use-data-mining-and-find-some-good-reads-for-you-e5bf1b576316).
+We can conclude with this exercise how powerful machine learning algorithms can be. No wonder that many companies work very hard to master them. Prediction is something that can be very valuable financially. Many skills must be honed to reach a very high level as a professional in this area, such as statistical analysis, notions of probability, computing, and mathematics. The models are complex, and a thorough study must be done to understand their parameters and their influence on the outcome.
 
-## Licensing, Authors, Acknowledgements<a name="licensing"></a>
 
-You can find the Licensing and other descriptive information about the Goodreads-books dataset at Kaggle's website [here](https://www.kaggle.com/jealousleopard/goodreadsbooks). Also I should mention that the article linked here for extra reading to understand the CRISP-DM methodology was shared from the datasciencecentral website [here](https://www.datasciencecentral.com/page/search?q=CRISP+DM). Feel free to use the attached code in the Python Jupyter notebook files as you would like! Keep coding to understand and apply datascience.
