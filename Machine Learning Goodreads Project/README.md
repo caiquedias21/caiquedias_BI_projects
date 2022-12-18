@@ -5,7 +5,7 @@ In this project we will analyse the Goodreads-books dataset from the Kaggle webs
 
 1. [Installation](#installation)
 2. [Methodology](#methodology)
-3. [Queries](#Questions)
+3. [Queries](#questions)
 6. [Summary Results](#results)
 
 ## Installation <a name="installation"></a>
@@ -41,7 +41,7 @@ Model maintenance : It’s the debug step.
 Deployment : After the entire process that is carried out in a development environment, this project will be put into production.
 
 
-## Queries :thinking: <a name="Questions"></a>
+## Queries :thinking: <a name="questions"></a>
 
 To get more insights about the Goodreads-books dataset, I wanted to find answers to the following questions: 
 
