@@ -1,0 +1,382 @@
+---
+title: "AirBnbAnalysisR"
+author: "Caique Dias"
+date: "2022-12-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The objective of this project is to analyze data from the hostel and hotel rental platform called AirBnB.
+
+This platform operates with enormous amounts of data. Thanks for the fact that it is a platform used worldwide and therefore, it would not be very efficient to use classic programs such as Excel to explore, analyze and process them. That's why we are using R.
+
+
+First I will select a working directory. You can adapt to the folder that is on your computer, for example the directory path of this file.
+
+
+```{r}
+directory = 'c:/Users/caiqu/OneDrive/Documentos/Big Data with R/Project/'
+directory
+```
+It is possible to get the path of this working directory thanks to the `getwd()` function and to set it thanks to the `setwd()` function.
+
+```{r}
+getwd()
+```
+
+```{r}
+setwd(directory)
+```
+
+
+The AirBnB data format is in R format. R is offering its own data format (.rdata). This format is binary and allows to save several R objects into a single Rdata file. This type of files is usually very optimized in term of disk usage. The equivalent in (.csv) is more or less 4x of its size.
+
+We can manipulate such Rdata files thanks to the `load` function:
+
+```{r}
+# Reloading the data
+load(file=paste(directory,'AirBnB (1).Rdata', sep = ''))
+```
+
+We can see that we loaded 2 files:
+
+* **L** :  is a data frame of 52725 observations and 95 variables.
+* **R** :  is a data frame of 663599 observations and 2 variables.
+
+Let's take a first look at what these data frames are :
+
+```{r}
+colnames(L)
+```
+At first we can see that there are numerous columns that I believe will not be useful in this specific analysis, so I will remove them from the data frame to be analyzed.
+
+```{r}
+airbnb_extract <- subset(L, select = c(id, name, host_id, host_name, street, city, state,
+                                       zipcode, country_code, country, latitude, longitude, 
+                                       property_type, room_type, accommodates, bathrooms, bedrooms,
+                                       beds, bed_type, square_feet, price, weekly_price, monthly_price,
+                                       number_of_reviews, review_scores_rating, reviews_per_month ))
+```
+
+So here we have 26 columns, `id` is the identifier and `name`is the name of the place.
+The `host_id`and `host_name` are the identifier and name of the owner of the accommodation.
+The `street`, `city`, `state`, `zipcode`, `country_code`, `country`, `latitude` and `longitude` are the characteristics of geo localization and address of the accommodation.
+The `property_type`, `room_type`, `accomodates`, `bathrooms`, `bedrooms`,  `beds`, `bed_type` and `square_feet` are the apartment features.
+The `price`, `weekly_price` and `monthly_price` are the prices of accommodation.
+The `number_of_reviews`, `review_scores_rating` and `reviews_per_month`are the customer feedback.
+
+Now we analyse the dataframe `R`:
+
+```{r}
+colnames(R)
+```
+Here we have two columns `listing_id` and `date`.
+
+Looking at the table, we can conclude that this table contains all reservations made on airbnb during a period of time, `listing_id` is the identifier of the accommodation and `date` is the date of reservation. In this table, we will extract all of the columns.
+
+```{r}
+reservations_extract <- R
+```
+
+In this project, we will only focus on accommodations that are located in the city of Paris. To do this filter, I'll take a look at all the unique responses from the columns that make up the apartment addresses.
+
+```{r}
+unique(airbnb_extract$city)
+```
+```{r}
+unique(airbnb_extract$zipcode)
+```
+```{r}
+unique(airbnb_extract$state)
+```
+
+After observing the responses of the 3 columns, we can see that the easiest one to work with is the `zip_code`, as it is a more structured value that contains the initial numbers 75 corresponds to the Paris zip code and the last 3 numbers are the information of an `arrondissement` number that we can extract later.
+
+```{r}
+airbnb_extract = airbnb_extract[substr(airbnb_extract$zipcode,1,2) == "75",]
+unique(airbnb_extract$zipcode)
+```
+
+Here we only filter the apartments that are in a zip code starting with "75" which is the code for Paris.
+
+The `dplyr` packages offers an ensemble of tools, functions and formats allowing to manage, in an efficient and easy way, very large data sets. The idea of this set of functions is also to manipulate the data in a way which is close to the way humans think. The library `stringr`allows us to use functions that work with strings.
+
+```{r include=FALSE}
+library(dplyr)
+library(stringr)
+```
+
+With the `mutate` function, we will create a new column called `arrondissement` that will extract the last 2 digits of the column `zip_code` of the filtered data frame.
+
+```{r}
+
+airbnb_extract = mutate(airbnb_extract,arrondissement = substr(airbnb_extract$zipcode,str_length(airbnb_extract$zipcode)-1,str_length(airbnb_extract$zipcode)))
+
+unique(airbnb_extract$arrondissement)
+```
+We will eliminate the lines that contain an arrondissement equal to "75" or "IS" or "22" that do not match with the reality.
+
+```{r}
+airbnb_extract = airbnb_extract[airbnb_extract$arrondissement != "IS" & airbnb_extract$arrondissement != "75" & airbnb_extract$arrondissement != "22" & airbnb_extract$arrondissement != "00",]
+unique(airbnb_extract$arrondissement)
+```
+Now that we are well in this context, let's see how the data frame turned out.
+
+```{r eval=FALSE}
+airbnb_extract
+```
+We can begin to see the relationship between the variables.
+
+First we will look at the relationship between prices and apartment features. 
+
+Note that the price columns (`price`, `weekly_price` and `monthly_price`) do not have exactly a numerical value to be worked on, so we will create 3 new columns that will extract exactly the numerical value of the cells.
+
+```{r}
+airbnb_extract = mutate(airbnb_extract, price_num = as.numeric(str_extract(gsub(",", "", airbnb_extract$price), "[0-9]+\\.[0-9]+")), weekly_price_num = as.numeric(str_extract(gsub(",", "", airbnb_extract$weekly_price), "[0-9]+\\.[0-9]+")), monthly_price_num = as.numeric(str_extract(gsub(",", "", airbnb_extract$monthly_price), "[0-9]+\\.[0-9]+")))
+```
+
+```{r eval=FALSE}
+subset(airbnb_extract, select = c(price, price_num, weekly_price, weekly_price_num, monthly_price, monthly_price_num))
+```
+
+To create graphics we will use the library `ggplot2`.
+
+```{r include=FALSE}
+library(ggplot2)
+```
+
+To begin with, we will see the relationship between the average price per number of accommodates and the number of accommodates.
+
+
+```{r}
+data_df = airbnb_extract %>% 
+        group_by(accommodates) %>% 
+        summarise(price_mean = mean(price_num,na.rm=TRUE))
+
+ggplot(data=data_df) + 
+  geom_point(aes(x = accommodates, y = price_mean)) +
+  geom_smooth(mapping = aes(x = accommodates, y = price_mean),method='lm')
+```
+
+It is clear that the greater the number of accommodates, the higher the price of the apartment in a linear relationship.
+
+Now we will compare all the values that make up the apartment's characteristics with all types of prices. As apartment features we have `room_type`(categorical), `accommodates`(numerical), `bathrooms`(numerical), `bedrooms`(numerical), `beds`(numerical), `bed_type`(categorical) `square_feet`(numerical).
+
+For the prices we have the numeric columns created earlier.
+
+To analyze the categorical columns, I will look at the different outputs of each.
+
+```{r}
+unique(airbnb_extract$room_type)
+```
+```{r}
+unique(airbnb_extract$bed_type)
+```
+
+To analyze the numerical columns, I will look at how many nulls there are in each one.
+
+```{r}
+sum(is.na(airbnb_extract$accommodates))
+```
+```{r}
+sum(is.na(airbnb_extract$bathrooms))
+```
+```{r}
+sum(is.na(airbnb_extract$bedrooms))
+```
+```{r}
+sum(is.na(airbnb_extract$beds))
+```
+```{r}
+sum(is.na(airbnb_extract$square_feet))
+```
+```{r}
+sum(is.na(airbnb_extract$price_num))
+```
+```{r}
+sum(is.na(airbnb_extract$weekly_price_num))
+```
+```{r}
+sum(is.na(airbnb_extract$monthly_price_num))
+```
+
+The columns `square_feet`, `weekly_price_num` and `monthly_price_num` have a lot of missing values, so we won't use them anymore.
+
+So, we can see the relationship between the average price per bedrooms and the number of bedrooms.
+
+
+```{r}
+data_df = airbnb_extract %>% 
+        group_by(bedrooms) %>% 
+        summarise(price_mean = mean(price_num,na.rm=TRUE))
+
+ggplot(data=na.omit(data_df)) + 
+  geom_point(aes(x = bedrooms, y = price_mean)) +
+  geom_smooth(mapping = aes(x = bedrooms, y = price_mean),method='lm')+
+  labs(x = "Number of bedrooms", y = "Price Average ($)")
+
+```
+The relationship between the average price per bathrooms and the number of bathrooms:
+
+
+```{r}
+data_df = airbnb_extract %>% 
+        group_by(bathrooms) %>% 
+        summarise(price_mean = mean(price_num,na.rm=TRUE))
+
+ggplot(data=na.omit(data_df)) + 
+  geom_point(aes(x = bathrooms, y = price_mean)) +
+  geom_smooth(mapping = aes(x = bathrooms, y = price_mean),method='lm')+
+  labs(x = "Number of bathrooms", y = "Price Average ($)")
+
+```
+The relationship between the average price per beds and the number of beds:
+
+
+```{r}
+data_df = airbnb_extract %>% 
+        group_by(beds) %>% 
+        summarise(price_mean = mean(price_num,na.rm=TRUE))
+
+ggplot(data=na.omit(data_df)) + 
+  geom_point(aes(x = beds, y = price_mean)) +
+  geom_smooth(mapping = aes(x = beds, y = price_mean),method='lm')+
+  labs(x = "Number of beds", y = "Price Average ($)")
+```
+
+For the categorical columns, we use a vertical bar plot.
+
+```{r}
+data_df = airbnb_extract %>% 
+        group_by(bed_type) %>% 
+        summarise(price_mean = mean(price_num,na.rm=TRUE))
+
+barplot(height=data_df$price_mean, main="Average of Price",
+   xlab="Bed Type", names.arg = data_df$bed_type)
+
+
+ggplot(data_df, aes(x = bed_type, y = price_mean)) +
+  geom_col() +
+  labs(x = "Bed Type", y = "Average of Price")
+
+```
+
+```{r}
+data_df = airbnb_extract %>% 
+        group_by(room_type) %>% 
+        summarise(price_mean = mean(price_num,na.rm=TRUE))
+
+barplot(height=data_df$price_mean, main="Average of Price",
+   xlab="Room Type", names.arg = data_df$room_type)
+
+ggplot(data_df, aes(x = room_type, y = price_mean)) +
+  geom_col() +
+  labs(x = "Room Type", y = "Average of Price")
+
+```
+Then it becomes clear the relationship between the price and the characteristics of the apartment. The larger the number of accommodated, rooms, beds and bathrooms, the more expensive the rent.An entire home is more expensive than shared rooms and apartments with a real bed are very expensive.
+
+Now, we’re going to look at the number of apartments per owner:
+
+Let me check the outputs first.
+
+```{r}
+length(unique(airbnb_extract$host_id))
+```
+There is a 43778 different owners. The amount is so great that if we plotted all of them would be a poor graphics. Then I will group them by the `host_id` and see the number of apartments of each and select only those that have more places.
+
+
+```{r}
+options(dplyr.summarise.inform = FALSE)
+owners_count = airbnb_extract %>%
+        select(host_id,host_name) %>%
+        group_by(host_id, host_name) %>% 
+        summarize(count_host = n()) %>%
+        arrange(desc(count_host))  %>% 
+  
+  # Select top 25 that have more places
+        
+        head(n=25) 
+
+ggplot(owners_count, aes(x = owners_count$count_host, y = reorder(owners_count$host_name
+                                                                  ,owners_count$count_host ))) +
+  geom_col() +
+  geom_text(aes(label = owners_count$count_host), nudge_x = 3)+
+  labs(x = "Number of appartments", y = "Owner")
+
+  
+```
+Now we can wonder what would be the average price per arrondissement. This kind of question is interesting because we can see the most expensive regions of Paris.
+
+```{r}
+arro_price = airbnb_extract %>% 
+        group_by(arrondissement) %>% 
+        summarise(price_mean = mean(price_num,na.rm=TRUE))
+
+ggplot(arro_price, aes(x = reorder(arrondissement,price_mean), y = price_mean)) +
+  geom_col() +
+  labs(x = "Quarter (Arrondissement)", y = "Average of Price")
+
+```
+So we can observe that the most expensive areas of Paris are the 8ème, 6ème, 7ème and 01ère arrondissement.
+
+For a last analysis, we can check the number of visits by quarters in a given period of time.
+
+We will use the other table from our data source.
+
+```{r eval=FALSE}
+reservations_extract
+```
+
+Let’s change the name of the first column to `id`.
+
+```{r}
+colnames(reservations_extract)[1] = "id"
+```
+
+We will join the 2 tables by the identification column.
+
+```{r}
+airbnb_reservations = inner_join(reservations_extract,airbnb_extract,by='id')
+```
+
+The library `lubridate`allows us to create a column of type date.
+
+```{r include=FALSE}
+library(lubridate)
+```
+```{r}
+# Transform to the date column
+
+airbnb_reservations = mutate(airbnb_reservations, date_reservation = ymd(date)) 
+```
+
+Let me check the max and min date of the data frame.
+
+```{r}
+max(airbnb_reservations$date_reservation)
+min(airbnb_reservations$date_reservation)
+```
+
+Let’s look at how many visits each arrondissement had in a given period of time like 2015-09-04 to 2015-09-18.
+
+```{r}
+res_data = airbnb_reservations %>%
+  select(date_reservation, arrondissement) %>%
+  filter(date_reservation > "2015-09-04" & date_reservation <"2015-09-18") %>%
+  group_by(arrondissement)%>% 
+  summarise(count_visits = n())
+
+ggplot(data=res_data, aes(x=arrondissement, y=count_visits, group=1)) +
+  geom_path()+
+  geom_point()+
+  labs(x = "Quarter (Arrondissement)", y = "Total of visits")
+
+
+```
+
+
+
